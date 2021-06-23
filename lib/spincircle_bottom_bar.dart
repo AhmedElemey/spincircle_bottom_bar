@@ -7,7 +7,9 @@ class SpinCircleBottomBarHolder extends StatelessWidget {
   final SCBottomBarDetails bottomNavigationBar;
   final Widget child;
 
-  const SpinCircleBottomBarHolder({Key key, @required this.bottomNavigationBar, @required this.child}) : super(key: key);
+  const SpinCircleBottomBarHolder(
+      {Key /*?*/ key, @required this.bottomNavigationBar, @required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class SpinCircleBottomBarHolder extends StatelessWidget {
           children: <Widget>[
             Expanded(child: child),
             Container(
-              height: bottomNavigationBar.bnbHeight??80,
+              height: bottomNavigationBar.bnbHeight ?? 80,
             )
           ],
         ),
@@ -34,9 +36,10 @@ class SpinCircleBottomBarHolder extends StatelessWidget {
 }
 
 class SpinCircleBottomBar extends StatefulWidget {
-  final SCBottomBarDetails bottomNavigationBar;
+  final SCBottomBarDetails /*?*/ bottomNavigationBar;
 
-  const SpinCircleBottomBar({Key key, this.bottomNavigationBar}) : super(key: key);
+  const SpinCircleBottomBar({Key /*?*/ key, @required this.bottomNavigationBar})
+      : super(key: key);
 
   @override
   _SpinCircleBottomBarState createState() => _SpinCircleBottomBarState();
@@ -46,23 +49,27 @@ enum ExpansionStatus { OPEN, CLOSE, IDLE }
 
 class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
   ExpansionStatus expansionStatus = ExpansionStatus.IDLE;
-  SCBottomBarDetails expandableBottomBarDetails;
+  SCBottomBarDetails /*?*/ expandableBottomBarDetails;
   int activeIndex = 0;
 
   @override
   void initState() {
     super.initState();
     expandableBottomBarDetails = widget.bottomNavigationBar;
-    expandableBottomBarDetails.items.insert((expandableBottomBarDetails.items.length / 2).floor(), null);
-    expandableBottomBarDetails.circleColors = expandableBottomBarDetails.circleColors ?? [Colors.white, Colors.blue, Colors.red];
-    expandableBottomBarDetails.actionButtonDetails = expandableBottomBarDetails.actionButtonDetails ??
-        SCActionButtonDetails(
-            color: Colors.blue,
-            icon: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            elevation: 0);
+    expandableBottomBarDetails.items
+        .insert((expandableBottomBarDetails.items.length / 2).floor(), null);
+    expandableBottomBarDetails.circleColors =
+        expandableBottomBarDetails.circleColors ??
+            [Colors.white, Colors.blue, Colors.red];
+    expandableBottomBarDetails.actionButtonDetails =
+        expandableBottomBarDetails.actionButtonDetails ??
+            SCActionButtonDetails(
+                color: Colors.blue,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                elevation: 0);
   }
 
   @override
@@ -70,11 +77,20 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
     final width = MediaQuery.of(context).size.width;
 
     final double bottomBarHeight = expandableBottomBarDetails.bnbHeight ?? 80;
-    final IconThemeData iconTheme = expandableBottomBarDetails.iconTheme ?? IconThemeData(color: Colors.black45);
-    final IconThemeData activeIconTheme = expandableBottomBarDetails.activeIconTheme ?? IconThemeData(color: Colors.black);
-    final TextStyle textStyle = expandableBottomBarDetails.titleStyle ?? TextStyle(color: Colors.black45, fontWeight: FontWeight.normal, fontSize: 12);
-    final TextStyle activeTextStyle = expandableBottomBarDetails.activeTitleStyle ?? TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12);
-    final SCActionButtonDetails actionButtonDetails = expandableBottomBarDetails.actionButtonDetails;
+    final IconThemeData iconTheme = expandableBottomBarDetails.iconTheme ??
+        IconThemeData(color: Colors.black45);
+    final IconThemeData activeIconTheme =
+        expandableBottomBarDetails.activeIconTheme ??
+            IconThemeData(color: Colors.black);
+    final TextStyle textStyle = expandableBottomBarDetails.titleStyle ??
+        TextStyle(
+            color: Colors.black45, fontWeight: FontWeight.normal, fontSize: 12);
+    final TextStyle activeTextStyle =
+        expandableBottomBarDetails.activeTitleStyle ??
+            TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12);
+    final SCActionButtonDetails actionButtonDetails =
+        expandableBottomBarDetails.actionButtonDetails;
     bool shouldOpen = expansionStatus == ExpansionStatus.OPEN;
     return Container(
         height: bottomBarHeight * 2,
@@ -91,10 +107,14 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                   child: Stack(
                     children: <Widget>[
                       TweenAnimationBuilder(
-                        tween: Tween<double>(begin: shouldOpen ? -3.14 : 0, end: shouldOpen ? 0 : -3.14),
+                        tween: Tween<double>(
+                            begin: shouldOpen ? -3.14 : 0,
+                            end: shouldOpen ? 0 : -3.14),
                         curve: Curves.easeInOutQuad,
-                        duration: Duration(milliseconds: shouldOpen ? 500 : 800),
-                        builder: (BuildContext context, double value, Widget child) {
+                        duration:
+                            Duration(milliseconds: shouldOpen ? 500 : 800),
+                        builder: (BuildContext context, double value,
+                            Widget /*?*/ child) {
                           return Transform.rotate(
                             angle: value,
                             child: child,
@@ -107,10 +127,13 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                         ),
                       ),
                       TweenAnimationBuilder(
-                        tween: Tween<double>(begin: shouldOpen ? -3.14 : 0, end: shouldOpen ? 0 : -3.14),
+                        tween: Tween<double>(
+                            begin: shouldOpen ? -3.14 : 0,
+                            end: shouldOpen ? 0 : -3.14),
                         curve: Curves.easeInOutQuad,
                         duration: Duration(milliseconds: 600),
-                        builder: (BuildContext context, double value, Widget child) {
+                        builder: (BuildContext context, double value,
+                            Widget /*?*/ child) {
                           return Transform.rotate(
                             angle: value,
                             child: child,
@@ -123,10 +146,14 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                         ),
                       ),
                       TweenAnimationBuilder(
-                        tween: Tween<double>(begin: shouldOpen ? -3.14 : 0, end: shouldOpen ? 0 : -3.14),
-                        duration: Duration(milliseconds: shouldOpen ? 800 : 500),
+                        tween: Tween<double>(
+                            begin: shouldOpen ? -3.14 : 0,
+                            end: shouldOpen ? 0 : -3.14),
+                        duration:
+                            Duration(milliseconds: shouldOpen ? 800 : 500),
                         curve: Curves.easeInOutQuad,
-                        builder: (BuildContext context, double value, Widget child) {
+                        builder: (BuildContext context, double value,
+                            Widget /*?*/ child) {
                           return Transform.rotate(
                             angle: value,
                             child: child,
@@ -148,17 +175,27 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                 height: bottomBarHeight,
                 width: width,
                 decoration: BoxDecoration(
-                    color: expandableBottomBarDetails.backgroundColor ?? Colors.white,
-                    boxShadow: [BoxShadow(color: Colors.black.withAlpha(55), offset: Offset(0, expandableBottomBarDetails.elevation ?? 0), blurRadius: 10)]),
+                    color: expandableBottomBarDetails.backgroundColor ??
+                        Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withAlpha(55),
+                          offset: Offset(
+                              0, expandableBottomBarDetails.elevation ?? 0),
+                          blurRadius: 10)
+                    ]),
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: expandableBottomBarDetails.items.asMap().entries.map((entry) {
+                      children: expandableBottomBarDetails.items
+                          .asMap()
+                          .entries
+                          .map((entry) {
                         int index = entry.key;
-                        SCBottomBarItem itemDetails = entry.value;
+                        SCBottomBarItem /*?*/ itemDetails = entry.value;
                         bool isActive = activeIndex == index;
                         return Flexible(
                             child: itemDetails != null
@@ -172,14 +209,27 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                                     child: Center(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
                                           Icon(
-                                            isActive ? itemDetails.activeIcon ?? itemDetails.icon : itemDetails.icon,
-                                            color: isActive ? activeIconTheme.color : iconTheme.color,
-                                            size: isActive ? activeIconTheme.size : iconTheme.size,
+                                            isActive
+                                                ? itemDetails.activeIcon ??
+                                                    itemDetails.icon
+                                                : itemDetails.icon,
+                                            color: isActive
+                                                ? activeIconTheme.color
+                                                : iconTheme.color,
+                                            size: isActive
+                                                ? activeIconTheme.size
+                                                : iconTheme.size,
                                           ),
-                                          itemDetails.title != null ? Text(itemDetails.title, style: isActive ? activeTextStyle : textStyle) : Center()
+                                          itemDetails.title != null
+                                              ? Text(itemDetails.title,
+                                                  style: isActive
+                                                      ? activeTextStyle
+                                                      : textStyle)
+                                              : Center()
                                         ],
                                       ),
                                     ),
@@ -196,18 +246,24 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                 width: MediaQuery.of(context).size.width,
                 alignment: Alignment.center,
                 child: TweenAnimationBuilder(
-                  tween: Tween<double>(begin:shouldOpen?0.0:6.28319, end: shouldOpen?6.28319:0),
+                  tween: Tween<double>(
+                      begin: shouldOpen ? 0.0 : 6.28319,
+                      end: shouldOpen ? 6.28319 : 0),
                   duration: Duration(milliseconds: 250),
-                  builder: (context, angle, child) {
+                  builder: (context, dynamic angle, child) {
                     return Transform.rotate(
-                        angle: expansionStatus== ExpansionStatus.IDLE?0.0:angle,
+                        angle: expansionStatus == ExpansionStatus.IDLE
+                            ? 0.0
+                            : angle,
                         alignment: Alignment.center,
                         child: child);
                   },
                   child: FloatingActionButton(
                       elevation: actionButtonDetails.elevation,
                       backgroundColor: actionButtonDetails.color,
-                      child: shouldOpen ? Icon(Icons.close) : actionButtonDetails.icon,
+                      child: shouldOpen
+                          ? Icon(Icons.close)
+                          : actionButtonDetails.icon,
                       onPressed: () {
                         if (expansionStatus == ExpansionStatus.IDLE) {
                           this.setState(() {
@@ -215,7 +271,10 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
                           });
                         } else {
                           this.setState(() {
-                            expansionStatus = (expansionStatus == ExpansionStatus.OPEN) ? ExpansionStatus.CLOSE : ExpansionStatus.OPEN;
+                            expansionStatus =
+                                (expansionStatus == ExpansionStatus.OPEN)
+                                    ? ExpansionStatus.CLOSE
+                                    : ExpansionStatus.OPEN;
                           });
                         }
                       }),
@@ -226,11 +285,16 @@ class _SpinCircleBottomBarState extends State<SpinCircleBottomBar> {
 }
 
 class PrimaryCircle extends StatelessWidget {
-  final List<SCItem> circleItems;
-  final Color color;
-  final double radius;
+  final List<SCItem> /*?*/ circleItems;
+  final Color /*?*/ color;
+  final double /*?*/ radius;
 
-  const PrimaryCircle({Key key, @required this.color, @required this.radius, @required this.circleItems}) : super(key: key);
+  const PrimaryCircle(
+      {Key /*?*/ key,
+      @required this.color,
+      @required this.radius,
+      @required this.circleItems})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -254,9 +318,10 @@ class PrimaryCircle extends StatelessWidget {
               children: circleItems.asMap().entries.map((entry) {
                 SCItem value = entry.value;
                 return Transform.translate(
-                    offset: Offset.fromDirection(-(start + (entry.key * radianGap)), radius / 3),
+                    offset: Offset.fromDirection(
+                        -(start + (entry.key * radianGap)), radius / 3),
                     child: GestureDetector(
-                      onTap: value.onPressed,
+                      onTap: value.onPressed as void Function() /*?*/,
                       child: value.icon,
                     ));
               }).toList(),
@@ -269,10 +334,11 @@ class PrimaryCircle extends StatelessWidget {
 }
 
 class EmptyLayer extends StatelessWidget {
-  final Color color;
-  final double radius;
+  final Color /*?*/ color;
+  final double /*?*/ radius;
 
-  const EmptyLayer({Key key, this.color, this.radius}) : super(key: key);
+  const EmptyLayer({Key /*?*/ key, @required this.color, @required this.radius})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
